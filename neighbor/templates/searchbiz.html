@@ -1,0 +1,41 @@
+{% block content %}
+
+<div class="container">
+
+    <div class="row">
+
+        {% if bizsearched %}
+        <h1 style="color: white; text-align: left; margin-left: 10%;">Found {{ bizsearched|length }} of searched
+            category {{message}}
+        </h1>
+
+
+
+        <!-- Gallery item -->
+
+        {% for biz in bizsearched %}
+        <div class="row" style="margin-left: 10%;">
+
+            <a href="#">
+                <img src="{{biz.businesspic.url}}" height=400px; width=400px; alt="Image" style="height: 300px; ">
+            </a>
+
+            <div class="p-4">
+                <h2> Name: {{ biz.businessname }}</h2>
+                <h2> Email: {{ biz.businessemail }}</h2>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+</div>
+{% else %}
+<h1 style="color:white"> Found 0 categories for the search term {{message}}</h1>
+{% endif %}
+
+
+
+</div>
+</div>
+{% endblock %}
