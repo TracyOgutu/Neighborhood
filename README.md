@@ -24,6 +24,7 @@ Navigation pages include:
         * _Neighborhood image_
 
     * _It also has businesses and news alerts posted by the neighborhood members_
+    
     * _Each business has:_
         * _Picture_
         * _Name_
