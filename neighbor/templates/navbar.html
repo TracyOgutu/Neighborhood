@@ -1,0 +1,122 @@
+<!-- Navigation -->
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+        <div class="container">
+          <a class="navbar-brand js-scroll-trigger" href="#page-top">Home</a>
+          <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+            data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+            aria-label="Toggle navigation">
+            Menu
+            <i class="fas fa-bars"></i>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav text-uppercase ml-auto">
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#neighbor">Neighborhoods</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#news">News</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#business">Businesses</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+              </li>
+              <ul>
+              </ul>
+            </ul>
+          </div>
+    
+         
+      
+        </div>
+    
+    
+      </nav>
+    <nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="margin-top: 6%;margin-left: 7%;">
+    
+    
+    
+          <!-- Adding a search form  -->
+          <!-- search neighborhood -->
+    
+          <div class="col-sm-4 col-md-4 navbar-right">
+    
+              <form class="navbar-form" role="search" action="{% url 'search_neighborhood' %}">
+      
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search neighborhood" name="neighborhood">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+                </div>
+      
+              </form>
+            </div>
+      
+      
+            <!-- search business -->
+            <div class="col-sm-4 md-4 navbar-right">
+              <form class="navbar-form" role="search" action="{% url 'search_business' %}">
+      
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Filter by business" name="business" width="50">
+                  <div class="input-group-btn">
+                    <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+    
+            <div class="col-md-3">
+                {% if user.is_authenticated %}
+                <ul>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                      aria-expanded="false" style="color: white;"> {{user.username}} Account
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>
+                        <a href="{%url 'home' %}">Home</a>
+                      </li>
+                      <li>
+                        <a href="{%url 'singleprofile' user.id %}">View Profile</a>
+                      </li>
+                      <li>
+                        <a href="{%url 'addnews' %}">Add news</a>
+                      </li>
+                      <li>
+                        <a href="{%url 'addbusiness' %}">Add Business</a>
+                      </li>
+                      <li>
+                        <a href="/accounts/password/change">Change Password</a>
+                      </li>
+                      <li>
+                        <a href="/logout">Logout</a>
+                      </li>
+        
+                    </ul>
+                  </li>
+                </ul>
+                {% else %}
+                <ul>
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle btn btn-default text-white" data-toggle="dropdown" role="button"
+                      aria-expanded="false">Sign In
+                      <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu" role="menu">
+                      <li>
+                        <a class='btn btn-default' href="/accounts/login">Login</a>
+                      </li>
+                      <li>
+                        <a class='btn btn-default' href="/accounts/register">Create Account</a>
+                      </li>
+                    </ul>
+                  </li>
+                </ul>
+                {% endif %}
+              </div>
+            <!-- search form end --><br>
+    </nav>
