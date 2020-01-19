@@ -1,0 +1,408 @@
+{%load bootstrap4%}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Home</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/agency.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="#page-top">Home</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav text-uppercase ml-auto">
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#neighbor">Neighborhoods</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#news">News</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#business">Businesses</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+          </li>
+          <ul>
+          </ul>
+        </ul>
+      </div>
+
+     
+  
+    </div>
+
+
+  </nav>
+<nav class="navbar navbar-expand-lg navbar-dark fixed-top" style="margin-top: 6%;margin-left: 7%;">
+
+
+
+      <!-- Adding a search form  -->
+      <!-- search neighborhood -->
+
+      <div class="col-sm-4 col-md-4 navbar-right">
+
+          <form class="navbar-form" role="search" action="{% url 'search_neighborhood' %}">
+  
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search neighborhood" name="neighborhood">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+            </div>
+  
+          </form>
+        </div>
+  
+  
+        <!-- search business -->
+        <div class="col-sm-4 md-4 navbar-right">
+          <form class="navbar-form" role="search" action="{% url 'search_business' %}">
+  
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Filter by business" name="business" width="50">
+              <div class="input-group-btn">
+                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+              </div>
+            </div>
+          </form>
+        </div>
+
+        <div class="col-md-3">
+            {% if user.is_authenticated %}
+            <ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                  aria-expanded="false" style="color: white;"> {{user.username}} Account
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="{%url 'home' %}">Home</a>
+                  </li>
+                  <li>
+                      <a href="{%url 'createprofile' %}">Create Profile</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'singleprofile' user.id %}">View Profile</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'addnews' %}">Add news</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'addbusiness' %}">Add Business</a>
+                  </li>
+                  <li>
+                    <a href="/accounts/password/change">Change Password</a>
+                  </li>
+                  <li>
+                    <a href="/logout">Logout</a>
+                  </li>
+    
+                </ul>
+              </li>
+            </ul>
+            {% else %}
+            <ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default text-white" data-toggle="dropdown" role="button"
+                  aria-expanded="false">Sign In
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a class='btn btn-default' href="/accounts/login">Login</a>
+                  </li>
+                  <li>
+                    <a class='btn btn-default' href="/accounts/register">Create Account</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {% endif %}
+          </div>
+        <!-- search form end --><br>
+</nav>
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+        <div class="intro-lead-in">Welcome To Neighborhood Watch!</div>
+        <div class="intro-heading text-uppercase">It's Nice To Meet You</div>
+        <a class="btn btn-primary btn-xl text-uppercase js-scroll-trigger" href="{% url 'createprofile' %}">Create
+          Profile</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- NEIGHBORHOODS -->
+  <section class="bg-light page-section" id="neighbor">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">Neighborhoods</h2>
+          <h3 class="section-subheading text-muted">Home is where the heart is.</h3>
+        </div>
+      </div>
+      <div class="row">
+        {%if hood%}
+        {%for hood in hood%}
+        <div class="col-md-4 col-sm-6 portfolio-item">
+          <a class="portfolio-link" data-toggle="modal" data-target="#{{hood.hoodname}}">
+            <div class="portfolio-hover">
+              <div class="portfolio-hover-content">
+                <i class="fas fa-plus fa-3x"></i>
+              </div>
+            </div>
+            <img src="{{hood.hoodpic.url}}" alt="hoodpic" height="300px;" width="300px;">
+          </a>
+          <div class="portfolio-caption">
+            <h4>Name: {{hood.hoodname}}</h4>
+            <p class="text-muted"></p>
+          </div>
+        </div>
+        <!-- Modal 1 -->
+        <div class="portfolio-modal modal fade" id="{{hood.hoodname}}" tabindex="-1" role="dialog" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="close-modal" data-dismiss="modal">
+                <div class="lr">
+                  <div class="rl"></div>
+                </div>
+              </div>
+              <div class="container">
+                <div class="row">
+                  <div class="col-lg-8 mx-auto">
+
+                    <div class="modal-body">
+                      <!-- Project Details Go Here -->
+                      <h2 class="text-uppercase">{{hood.hoodname}}</h2>
+                      <p class="item-intro text-muted">Lorem ipsum dolor sit amet consectetur.</p>
+                      <img class="img-fluid d-block mx-auto" src="img/portfolio/01-full.jpg" alt="">
+                      <p>Use this area to describe your project. Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Est
+                        blanditiis dolorem culpa incidunt minus dignissimos deserunt repellat aperiam quasi sunt officia
+                        expedita beatae cupiditate, maiores repudiandae, nostrum, reiciendis facere nemo!</p>
+                      <ul class="list-inline">
+                        <li>Location: {{hood.hoodlocation}}</li>
+                      </ul>
+                      <button class="btn btn-primary" data-dismiss="modal" type="button">
+                        <i class="fas fa-times"></i>
+                        Close Neighborhood</button>
+                    </div>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        {%endfor%}
+        {%endif%}
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWS-->
+  <section class="bg-dark page-section" id="news">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase text-white">NEWS</h2>
+          <h3 class="section-subheading text-white">Be in the know.</h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12">
+          <ul class="timeline">
+            {%if news%}
+            {%for news in news%}
+            <li>
+              <div class="timeline-image">
+                <img class="rounded-circle" src="{{news.newspic.url}}" alt="newspic" height="220px;" width="220px;"
+                  style="margin-left: -12%;margin-top: -10%;">
+              </div>
+              <div class="timeline-panel">
+                <div class="timeline-heading bg-light">
+                  <h4>{{news.pub_date}}</h4>
+                  <h5>Posted by {{news.editor}}</h5>
+                  <h4 class="subheading">Title: {{news.title}}</h4>
+                </div>
+                <div class="timeline-body bg-light">
+                  <p class="text-muted">{{news.description|safe}}</p>
+                </div>
+              </div>
+            </li>
+            {%endfor%}
+            {%endif%}
+
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSINESSES -->
+  <section class="bg-light page-section" id="business">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">BUSINESSES</h2>
+          <h3 class="section-subheading text-muted">Business has only two functions – marketing and innovation.</h3>
+        </div>
+      </div>
+      <div class="row">
+        {%if business%}
+        {%for business in business%}
+        <div class="col-sm-4">
+          <div class="team-member">
+            <img class="mx-auto rounded-circle" src="{{business.businesspic.url}}" alt="bizpic">
+            <h4>{{business.businessname}} by {{business.editor}}</h4>
+            <p class="text-muted">{{business.businessemail}}</p>
+            <ul class="list-inline social-buttons">
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-twitter"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-facebook-f"></i>
+                </a>
+              </li>
+              <li class="list-inline-item">
+                <a href="#">
+                  <i class="fab fa-linkedin-in"></i>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        {%endfor%}
+        {%endif%}
+      </div>
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p class="large text-muted">"Whatever you are, be a good one.” –Abraham Lincoln</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="page-section" id="contact">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12 text-center">
+          <h2 class="section-heading text-uppercase">EMERGENCY CONTACTS</h2>
+          <h3 class="section-subheading text-white">
+
+            POLICE DEPARTMENT: 999<br>
+            AMBULANCE: 222<br>
+            FIRE DEPARTMENT: 434<br><br><br>
+
+            We care for your wellbeing.</h3>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-4">
+          <span class="copyright">Copyright &copy; Neighborhood Website 2020</span>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline social-buttons">
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+        <div class="col-md-4">
+          <ul class="list-inline quicklinks">
+            <li class="list-inline-item">
+              <a href="#">Privacy Policy</a>
+            </li>
+            <li class="list-inline-item">
+              <a href="#">Terms of Use</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Portfolio Modals -->
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+
+  <!-- Contact form JavaScript -->
+  <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+  <script src="{% static 'js/contact_me.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'js/agency.min.js' %}"></script>
+
+</body>
+
+</html>
