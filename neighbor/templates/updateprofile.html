@@ -1,0 +1,143 @@
+{%load bootstrap4%}
+{%load static%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Business</title>
+  {{form.media}}
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="{% static 'css/all.min.css' %}" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" type="text/css">
+  <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic,700italic' rel='stylesheet'
+    type='text/css'>
+  <link href='https://fonts.googleapis.com/css?family=Roboto+Slab:400,100,300,700' rel='stylesheet' type='text/css'>
+
+  <!-- Custom styles for this template -->
+  <link href="{% static 'css/agency.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body id="page-top">
+
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand js-scroll-trigger" href="{%url 'home' %}">Home</a>
+      <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+        aria-label="Toggle navigation">
+        Menu
+        <i class="fas fa-bars"></i>
+      </button>
+      <div class="col-md-3">
+            {% if user.is_authenticated %}
+            <ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default" data-toggle="dropdown" role="button"
+                  aria-expanded="false" style="color: white;"> {{user.username}} Account
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a href="{%url 'home' %}">Home</a>
+                  </li>
+                  <li>
+                      <a href="{%url 'createprofile' %}">Create Profile</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'singleprofile' user.id %}">View Profile</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'addnews' %}">Add news</a>
+                  </li>
+                  <li>
+                    <a href="{%url 'addbusiness' %}">Add Business</a>
+                  </li>
+                  <li>
+                    <a href="/accounts/password/change">Change Password</a>
+                  </li>
+                  <li>
+                    <a href="/logout">Logout</a>
+                  </li>
+    
+                </ul>
+              </li>
+            </ul>
+            {% else %}
+            <ul>
+              <li class="dropdown">
+                <a href="#" class="dropdown-toggle btn btn-default text-white" data-toggle="dropdown" role="button"
+                  aria-expanded="false">Sign In
+                  <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li>
+                    <a class='btn btn-default' href="/accounts/login">Login</a>
+                  </li>
+                  <li>
+                    <a class='btn btn-default' href="/accounts/register">Create Account</a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+            {% endif %}
+          </div>
+
+    </div>
+  </nav>
+
+
+  <!-- Header -->
+  <header class="masthead">
+    <div class="container">
+      <div class="intro-text">
+
+            {% if user.is_authenticated%}
+            <div class="col-lg-7 my-auto">
+        
+        
+                <form action="{%url 'updateprofile'%}" method="post" enctype="multipart/form-data">
+                    {%csrf_token%}
+        
+                    {% bootstrap_form form%}
+                    <input type="submit" class="btn btn-success btn-lg" value="Post">
+                </form>
+            </div>
+            {%endif%}
+
+        
+      </div>
+    </div>
+  </header>
+
+
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'js/jquery.min.js' %}"></script>
+  <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+
+  <!-- Plugin JavaScript -->
+  <script src="{% static 'js/jquery.easing.min.js' %}"></script>
+
+  <!-- Contact form JavaScript -->
+  <script src="{% static 'js/jqBootstrapValidation.js' %}"></script>
+  <script src="{% static 'js/contact_me.js' %}"></script>
+
+  <!-- Custom scripts for this template -->
+  <script src="{% static 'js/agency.min.js' %}"></script>
+
+</body>
+
+</html>
