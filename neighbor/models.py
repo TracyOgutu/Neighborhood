@@ -101,9 +101,9 @@ class Business(models.Model):
 
     @classmethod
     def get_businesses(cls):
-        ''''
+        '''
         Getting all businesses
-        ''''
+        '''
         biz=cls.objects.all()
         return biz
 

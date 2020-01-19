@@ -4,8 +4,9 @@ from .models import News,Neighborhood,Business,UserProfile
 from .forms import NewsForm, UserProfileForm,BusinessForm
 from django.core.exceptions import ObjectDoesNotExist
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 # Create your views here.
-
+@login_required(login_url='/accounts/login/')
 def home(request):
     '''
     Displays the home page details such as news alerts
@@ -16,7 +17,7 @@ def home(request):
     hood=Neighborhood.get_hood()
 
     return render(request,'testhome.html',{"news":news,"business":business,"profile":profile,"hood":hood})
-
+@login_required(login_url='/accounts/login/')
 def add_news(request):
     '''
     Processes news data from the form and stores it in the database
@@ -32,7 +33,7 @@ def add_news(request):
     else:
         form = NewsForm()
     return render(request, 'postnews.html', {"form":form})
-        
+@login_required(login_url='/accounts/login/')    
 def single_news(request,newsid):
     '''
     Shows the details of a single alert posted
@@ -40,7 +41,7 @@ def single_news(request,newsid):
     single_post=News.single_news(newsid)
 
     return render(request,'singlenews.html',{"single_post":single_post})
-
+@login_required(login_url='/accounts/login/')
 def add_business(request):
     '''
     Processes business data provided and stores it in the database
@@ -56,7 +57,7 @@ def add_business(request):
     else:
         form=BusinessForm()
     return render(request,'postbusiness.html',{"form":form})
-
+@login_required(login_url='/accounts/login/')
 def single_business(request,businessid):
     '''
     Shows the details of a single business that has been posted 
@@ -64,7 +65,7 @@ def single_business(request,businessid):
     single_biz=Business.single_business(businessid)
 
     return render(request,'singlebiz.html',{"singlebiz":single_biz})
-
+@login_required(login_url='/accounts/login/')
 def createprofile(request):
     '''
     Processes profile form data and stores in the database
@@ -80,7 +81,7 @@ def createprofile(request):
     else:
         form=UserProfileForm()
     return render(request,'postprofile.html',{"form":form})
-
+@login_required(login_url='/accounts/login/')
 def updateprofile(request):
     if request.method == 'POST':
         form =UserProfileForm(request.POST, request.FILES,instance=request.user.userprofile)
@@ -93,7 +94,7 @@ def updateprofile(request):
     return render(request,'updateprofile.html',{"form":form})
 
    
-
+@login_required(login_url='/accounts/login/')
 def single_profile(request,userid):
     '''
     Displays a single user profile, their business and alerts if any
@@ -115,7 +116,7 @@ def single_profile(request,userid):
         messages.info(request,'The user has not posted any alerts')
 
     return render(request,'profile.html',{"profile":profile})
-
+@login_required(login_url='/accounts/login/')
 def search_neighborhood(request):
     '''
     Searching for a neighborhood by name
@@ -131,7 +132,7 @@ def search_neighborhood(request):
         message = "You haven't searched for any category"
         return render(request, 'searchhood.html',{"message":message})
 
-
+@login_required(login_url='/accounts/login/')
 def search_business(request):
     '''
     Searching for a business by name
